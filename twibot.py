@@ -31,31 +31,34 @@ def main():
 
     last_tweet_id = 0
 
-    print("Searching for last tweets")
-    while(True):        
-        search_query = "-is:retweet from:" + twitter_user
-        json_response = client.search_recent_tweets(query=search_query)
-        # print(json.dumps(json_response, indent=4, sort_keys=True))
-        if json_response.meta['newest_id'] != last_tweet_id:
-            print(datetime.now())
-            print("FOUND!! ****************************************")
-            
-            print(json_response.data[0]['text'])
-            print('newest_id: ' + json_response.meta['newest_id'])
-            
-            last_tweet_id = json_response.meta['newest_id']
+    print("Searching for last tweets...")
+    while(True):
+        try:
+            search_query = "-is:retweet from:" + twitter_user
+            json_response = client.search_recent_tweets(query=search_query)
+            # print(json.dumps(json_response, indent=4, sort_keys=True))
+            if json_response.meta['newest_id'] != last_tweet_id:
+                print(datetime.now())
+                print("FOUND!! ****************************************")
+                
+                print(json_response.data[0]['text'])
+                print('newest_id: ' + json_response.meta['newest_id'])
+                
+                last_tweet_id = json_response.meta['newest_id']
 
-            # retweet
-            client.retweet(last_tweet_id)
+                # retweet
+                client.retweet(last_tweet_id)
 
-            # like
-            client.like(last_tweet_id)
+                # like
+                client.like(last_tweet_id)
 
-            # reply with custom text
-            client.create_tweet(text=args.text,in_reply_to_tweet_id=last_tweet_id)
+                # reply with custom text
+                client.create_tweet(text=args.text,in_reply_to_tweet_id=last_tweet_id)
 
-            print("************************************************")
-            print("Waiting for a new tweet...")
+                print("************************************************")
+                print("Waiting for a new tweet...")
+        except:
+            pass
         
         time.sleep(args.seconds)
             
