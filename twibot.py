@@ -21,7 +21,7 @@ client = tweepy.Client(
 
 def main():
 
-    parser = argparse.ArgumentParser(description='Crypto Bot for Twitter')
+    parser = argparse.ArgumentParser(description='🐥🤖 TwitBot, Twitter Bot for Twitter')
     parser.add_argument('-t','--text', help='Twitter text', required=True)
     parser.add_argument('-u','--user', help='Twitter user', required=True)
     parser.add_argument('-s','--seconds', help='Seconds between each check', required=True, type=int)
