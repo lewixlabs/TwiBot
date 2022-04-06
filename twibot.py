@@ -55,9 +55,7 @@ def main():
             client.create_tweet(text=args.text,in_reply_to_tweet_id=last_tweet_id)
 
             print("************************************************")
-        else:
-            print(datetime.now())
-            print("Nothing new")
+            print("Waiting for a new tweet...")
         
         time.sleep(args.seconds)
             
